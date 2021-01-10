@@ -4,6 +4,7 @@
 #include <OneWire.h>
 
 #define BEEPER_PIN 5
+#define LED_PIN 9
 
 #define TCMAX 70
 #define TGMAX 80
@@ -31,6 +32,18 @@ String Line1;
 String Line2;
 String Line3;
 
+void setup()
+{
+    pinMode(BEEPER_PIN, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
+    byte address = Pantalla::iniciar();
+    Pantalla::presentacion();
+    dallas(2, 1);
+    dallas(3, 1);
+    dallas(4, 1);
+    Serial.begin(115200);
+}
+
 int16_t dallas(int x, byte start)
 {
     OneWire ds(x);
@@ -50,22 +63,10 @@ int16_t dallas(int x, byte start)
         ds.write(0xCC);
         ds.write(0x44,1);
         if (start) delay(1000);
-        /* code */
     } while (start--);
     int int_result = (int)result;
     if (int_result < 0) int_result = 0;
     return int_result;
-}
-
-void setup()
-{
-    pinMode(BEEPER_PIN, OUTPUT);
-    byte address = Pantalla::iniciar();
-    Pantalla::presentacion();
-    dallas(2, 1);
-    dallas(3, 1);
-    dallas(4, 1);
-    Serial.begin(115200);
 }
 
 void loop()
@@ -73,6 +74,7 @@ void loop()
     digitalWrite(BEEPER_PIN, 0);
     if (Serial.available() > 0)
     {
+        digitalWrite(LED_PIN, 1); delay(25); digitalWrite(LED_PIN, 0);
         TC = TG = TP = "0";
         FC = FG = FP = "0";
         TEMP_IN = TEMP_OUT1 = TEMP_OUT2 = "0";
@@ -196,6 +198,5 @@ void loop()
 
         digitalWrite(BEEPER_PIN, 1);
     }
-
 
 }

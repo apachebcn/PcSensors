@@ -39,6 +39,6 @@ void Pantalla::presentacion()
     lcd.print("PEDRO REINA ROJAS");
     lcd.setCursor(0, 1);
     lcd.print("-Sensores de mi PC-");
-    lcd.setCursor(0, 2);
+    lcd.setCursor(0, 3);
     lcd.print("Hola :-D");
 }
