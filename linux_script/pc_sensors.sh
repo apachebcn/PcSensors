@@ -84,6 +84,7 @@ do
     do
         if [ -c "$name_dev" ]; then
             arduino_dev=$name_dev
+            break
         fi
     done
 
@@ -93,43 +94,47 @@ do
         if [ $cpu_temp_sensor_file ] ; then
             value=$(cat $cpu_temp_sensor_file)
             value=$(echo "$value" | sed "s/000//g")
-            data="$data TC$value"
+            data="$data|TC$value"
         fi
 
         # Temperatura GPU
         if [ $gpu_temp_sensor_file ]; then
             value=$(cat $gpu_temp_sensor_file)
             value=$(echo "$value" | sed "s/000//g")
-            data="$data TG$value"
+            data="$data|TG$value"
         fi
 
         # Temperatura PCB
         if [ $pcb_temp_sensor_file ]; then
             value=$(cat $pcb_temp_sensor_file)
             value=$(echo "$value" | sed "s/000//g")
-            data="$data TP$value"
+            data="$data|TP$value"
         fi
 
         # Fan CPU
         if [ $cpu_fan_sensor_file ] ; then
             value=$(cat $cpu_fan_sensor_file)
-            data="$data FC$value"
+            data="$data|FC$value"
         fi
 
         # Fan GPU
         if [ $gpu_fan_sensor_file ]; then
             value=$(cat $gpu_fan_sensor_file)
-            data="$data FG$value"
+            data="$data|FG$value"
         fi
 
         # Fan PCB
         if [ $pcb_fan_sensor_file ]; then
             value=$(cat $pcb_fan_sensor_file)
-            data="$data FP$value"
+            data="$data|FP$value"
         fi
 
         if [ "$data" ]; then
-            echo "data: $data"
+            data="$data|"
+            sudo chmod 777 $arduino_dev
+            # stty -F $arduino_dev -hupcl
+            stty -F /dev/ttyUSB0 115200 cs8 -cstopb -parenb
+            echo "Sending to $arduino_dev -> data: $data"
             echo $data > $arduino_dev
         fi
 
