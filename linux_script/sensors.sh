@@ -12,6 +12,10 @@ pcb_fan_label=""
 # Sensores de temperatura
 cpu_temp_sensor_file=""
 gpu_temp_sensor_file=""
+pcb_temp_sensor_file=""
+cpu_fan_sensor_file=""
+gpu_fan_sensor_file=""
+pcb_fan_sensor_file=""
 sensors_labels=$(find /sys/devices/platform -name temp*label)
 sensors_count=0
 for sensor_label_file in $sensors_labels
@@ -20,6 +24,7 @@ do
     if [ "$sensor_temp_file" ]; then
 
         sensor_label_value=$(cat $sensor_label_file)
+
         if [ "$sensor_label_value" = "$cpu_temp_label" ]; then
             cpu_temp_sensor_file=$sensor_temp_file
             echo "$sensor_label_value * CAPTURADO COMO CPU TEMP *"
@@ -33,6 +38,21 @@ do
         if [ "$sensor_label_value" = "$pcb_temp_label" ]; then
             pcb_temp_sensor_file=$sensor_temp_file
             echo "$sensor_label_value * CAPTURADO COMO PCB TEMP *"
+            ((sensors_count=sensors_count+1))
+        fi
+        if [ "$sensor_label_value" = "$cpu_fan_label" ]; then
+            cpu_fan_sensor_file=$sensor_fan_file
+            echo "$sensor_label_value * CAPTURADO COMO CPU FAN *"
+            ((sensors_count=sensors_count+1))
+        fi
+        if [ "$sensor_label_value" = "$gpu_fan_label" ]; then
+            gpu_fan_sensor_file=$sensor_fan_file
+            echo "$sensor_label_value * CAPTURADO COMO GPU FAN *"
+            ((sensors_count=sensors_count+1))
+        fi
+        if [ "$sensor_label_value" = "$pcb_fan_label" ]; then
+            pcb_fan_sensor_file=$sensor_fan_file
+            echo "$sensor_label_value * CAPTURADO COMO PCB FAN *"
             ((sensors_count=sensors_count+1))
         fi
 
