@@ -1,11 +1,10 @@
-sleep_seconds=1
+sleep_seconds=3
 
-# Sensores de temperatura
-pcb_temp_input="/sys/devices/platform/nct6775.656/hwmon/hwmon6/temp1_input"
-cpu_temp_input="/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon2/temp1_input"
-gpu_temp_input="/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon5/temp1_input"
+pcb_temp_label="SYSTIN"
+pcb_fan_label="SYSTIN"
 
-# Sensores de ventiladores
-pcb_fan_sensor_input="/sys/devices/platform/nct6775.656/hwmon/hwmon6/fan1_input"
-cpu_fan_sensor_input="/sys/devices/platform/nct6775.656/hwmon/hwmon6/fan2_input"
-gpu_fan_sensor_input="/sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon5/fan1_input"
+cpu_temp_label="Tctl"
+cpu_fan_label="CPUTIN"
+
+gpu_temp_label="edge"
+gpu_fan_label="edge"
