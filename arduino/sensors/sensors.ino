@@ -5,7 +5,7 @@
 
 #define BEEPER_PIN 5
 
-#define TCMAX 40
+#define TCMAX 70
 #define TGMAX 80
 #define TPMAX 50
 
