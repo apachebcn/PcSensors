@@ -3,8 +3,8 @@
 
 #include <OneWire.h>
 
-#define BEEPER_PIN 5
-#define LED_PIN 9
+#define BEEPER_PIN A3
+#define LED_PIN 13
 
 #define TCMAX 70
 #define TGMAX 80
