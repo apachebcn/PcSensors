@@ -18,29 +18,47 @@ String data;
 String item;
 String label;
 String value;
+
+// Temperatura Cpu
 String TC;
 int TC_before;
+
+// Temperatura Gpu
 String TG;
 int TG_before;
+
+// Temperatura placa base
 String TP;
 int TP_before;
+
+// Ventilador Cpu
 String FC;
 int FC_before;
+
+// Ventilador Gpu
 String FG;
 int FG_before;
+
+// Ventilador Placa base
 String FP;
 int FP_before;
-String TEMP_IN;
-int TEMP_IN_before;
-String TEMP_OUT1;
-int TEMP_OUT1_before;
-String TEMP_OUT2;
-int TEMP_OUT2_before;
 
-String Line0;
-String Line1;
-String Line2;
-String Line3;
+// Temperatura Sonda A
+String TEMP_A;
+int TEMP_A_before;
+
+// Temperatura Sonda B
+String TEMP_B;
+int TEMP_B_before;
+
+// Temperatura Sonda C
+String TEMP_C;
+int TEMP_C_before;
+
+String Line0; // Pantalla linea 1
+String Line1; // Pantalla linea 2
+String Line2; // Pantalla linea 3
+String Line3; // Pantalla linea 4
 
 void setup()
 {
@@ -105,7 +123,7 @@ void loop()
         pantalla_timer = 0;
         TC = TG = TP = "0";
         FC = FG = FP = "0";
-        TEMP_IN = TEMP_OUT1 = TEMP_OUT2 = "0";
+        TEMP_A = TEMP_B = TEMP_C = "0";
         lcd.setCursor(19,3);
         lcd.print("*");
 
@@ -198,34 +216,34 @@ void loop()
         lcd.setCursor(0,2); lcd.print(Line2);
 
         temp = dallas(2, 0);
-        TEMP_IN = String(temp); 
+        TEMP_A = String(temp); 
 
         temp = dallas(3, 0);
-        TEMP_OUT1 = String(temp); 
+        TEMP_B = String(temp); 
 
         temp = dallas(4, 0);
-        TEMP_OUT2 = String(temp);
+        TEMP_C = String(temp);
 
         Line3 = "A:";
-        Line3 += TEMP_IN; 
+        Line3 += TEMP_A; 
         Line3 += char(223);
-        Line3 += compare_and_mem(TEMP_IN, TEMP_IN_before); TEMP_IN_before = TEMP_IN.toInt();
+        Line3 += compare_and_mem(TEMP_A, TEMP_A_before); TEMP_A_before = TEMP_A.toInt();
         for(i = Line3.length(); i < 7; i++)
         {
             Line3 += " ";
         }
         Line3 += "B:";
-        Line3 += TEMP_OUT1; 
+        Line3 += TEMP_B; 
         Line3 += char(223);
-        Line3 += compare_and_mem(TEMP_OUT1, TEMP_OUT1_before); TEMP_OUT1_before = TEMP_OUT1.toInt();
+        Line3 += compare_and_mem(TEMP_B, TEMP_B_before); TEMP_B_before = TEMP_B.toInt();
         for(i = Line3.length(); i < 14; i++)
         {
             Line3 += " ";
         }
         Line3 += "C:";
-        Line3 += TEMP_OUT2; 
+        Line3 += TEMP_C; 
         Line3 += char(223);
-        Line3 += compare_and_mem(TEMP_OUT2, TEMP_OUT2_before); TEMP_OUT2_before = TEMP_OUT2.toInt();
+        Line3 += compare_and_mem(TEMP_C, TEMP_C_before); TEMP_C_before = TEMP_C.toInt();
         for(i = Line3.length(); i < 20; i++)
         {
             Line3 += " ";
