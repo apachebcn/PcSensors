@@ -13,10 +13,10 @@ El montaje consta de 2 partes.
 # Configuración
 
 ## Seleccionamos los sensores que queremos usar
-Ejecutamos 'sensors' para ver si linux nos está listando todos los sensores que queremos usar. (si no aparecen, leemos la sección "sensors no está listando todos los sensores")
-La ejecución de sensors solo nos sirve para ver si todos nuestros sensores están siendo detectados, pero no nos sirve como referencia en la configuración.
-Ejecutamos 'list_sensors.sh' para escoger los nombres de los dispositivos para realizar la configuración.
-Un ejemplo de ello:
+Ejecutamos 'sensors' para ver si linux nos está listando todos los sensores que queremos usar. (si no aparecen, leemos la sección "sensors no está listando todos los sensores")<br>
+La ejecución de sensors solo nos sirve para ver si todos nuestros sensores están siendo detectados, pero no nos sirve como referencia en la configuración.<br>
+Ejecutamos 'list_sensors.sh' para escoger los nombres de los dispositivos para realizar la configuración.<br>
+Un ejemplo de ello:<br>
 <pre>
 --- LISTA DE SENSORES ---
 Formato: ETIQUETA_SENSOR: CONTROLADOR_TEMPERATURA [temp] >>> CONTROLADOR_VENTILADOR [rpm]
@@ -46,35 +46,36 @@ Composite: /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon0/temp1_
 /sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon5/fan1_input: 1169RPM
 </pre>
 
-Escogemos las etiquetas de los sensores que queremos usar, y las guardamos en el fichero `config.txt`
-Para los ventiladores, usamos también la etiqueta del sensor.
-
-*Nota:*
-*Nunca debemos usar el nombre real de un dispositivo dentro del script, porque estos nombres en muchas ocasiones cambian en algunos reinicios o actualización del sistema*
-
-
+Escogemos las etiquetas de los sensores que queremos usar, y las guardamos en el fichero `config.txt`<br>
+Para los ventiladores, usamos también la etiqueta del sensor.<br>
+<br>
+*Nota:*<br>
+*Nunca debemos usar el nombre real de un dispositivo dentro del script, porque estos nombres en muchas ocasiones cambian en algunos reinicios o actualización del sistema*<br>
+<br>
+<br>
 ## Prueba de datos
-Ejecutamos el script `run_pc_sensors.sh --force`.
-Esto ejecutará el script sin buscar la conexión del arduino, y veremos algo como esto: (simulación de envío)
+Ejecutamos el script `run_pc_sensors.sh --force`.<br>
+Esto ejecutará el script sin buscar la conexión del arduino, y veremos algo como esto: (simulación de envío)<br>
 <pre>
 Arduino no encontrado, los datos de envio serían -> data: |TP39|TC38|TG41|FP854|FC537|FG947
 </pre>
-**TP:** Temperatura Placa base
-**TC:** Temperatura Cpu
-**TG:** Temperatura Gpu
-**FP:** Ventilador Placabase
-**FC:** Ventilador Cpu
-**FG:** Ventilador Gpu
-
+**TP:** Temperatura Placa base<br>
+**TC:** Temperatura Cpu<br>
+**TG:** Temperatura Gpu<br>
+**FP:** Ventilador Placabase<br>
+**FC:** Ventilador Cpu<br>
+**FG:** Ventilador Gpu<br>
+<br>
 # Ejecución
-Arrancamos el arduino, y lo conectamos a cualquier un puerto USB del ordenador.
-Ejecutamos `run_pc_sensors.sh --force`.
-Si todo va bien, el arduino nos mostrará todos los datos por pantalla. (El intervalo de envío lo define el fichero `config.txt`)
-La pantalla del arduino está programada para que se apague a los 10 segundos de no recibir datos.
-Si queremos el montaje permanente, y que se ejecute todo al encender el pc, pondremos como script de inicio el fichero `run_pc_sensors.sh`
+Arrancamos el arduino, y lo conectamos a cualquier un puerto USB del ordenador.<br>
+Ejecutamos `run_pc_sensors.sh --force`.<br>
+Si todo va bien, el arduino nos mostrará todos los datos por pantalla. (El intervalo de envío lo define el fichero `config.txt`)<br>
+La pantalla del arduino está programada para que se apague a los 10 segundos de no recibir datos.<br>
+Si queremos el montaje permanente, y que se ejecute todo al encender el pc, pondremos como script de inicio el fichero `run_pc_sensors.sh`<br>
 
 # Problemas conocidos
 ## sensors no está listando todos los sensores.
-Probaremos a arrancar el grub con `acpi_enforce_resources=lax`, y ejecutar el `sensors-detect`
-Si conseguimos visualizar los sensores con este parámetro, editaremos el fichero `/etc/default/grub, y insertamos el parametro dentro de GRUB_CMDLINE_LINUX_DEFAULT, ejemplo:
-**GRUB_CMDLINE_LINUX_DEFAULT**="quiet apparmor=1 security=apparmor udev.log_priority=3 **acpi_enforce_resources=lax**"
+Probaremos a arrancar el grub con `acpi_enforce_resources=lax`, y ejecutar el `sensors-detect`<br>
+Si conseguimos visualizar los sensores con este parámetro, editaremos el fichero `/etc/default/grub, y insertamos el parametro dentro de GRUB_CMDLINE_LINUX_DEFAULT, ejemplo:<br>
+**GRUB_CMDLINE_LINUX_DEFAULT**="quiet apparmor=1 security=apparmor udev.log_priority=3 **acpi_enforce_resources=lax**"<br>
+<br>
