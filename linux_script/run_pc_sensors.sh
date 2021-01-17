@@ -6,10 +6,13 @@ if [ $pid ]; then
     exit
 fi
 
-sleep 2
-
 this_dir=$(dirname $(readlink -f $0))
 cd $this_dir
+
+forzar_envio=0
+if [ $1 == "--forzar" ]; then
+    forzar_envio=1
+fi
 
 source "config.txt"
 
@@ -109,7 +112,7 @@ do
         fi
     done
 
-    if [ $arduino_dev ]; then
+    if [ $arduino_dev ] | [ $forzar_envio ]; then
 
         # Temperatura PCB
         if [ $sensor_pcb_temp_file ]; then
@@ -158,13 +161,17 @@ do
         fi
 
         if [ "$data" ]; then
-            sudo chmod 777 $arduino_dev
-            # stty -F $arduino_dev -hupcl
-            stty -F /dev/ttyUSB0 115200 cs8 -cstopb -parenb
-            arduino_dev_before=$arduino_dev
-            data="$data|"
-            echo "Sending to $arduino_dev -> data: $data"
-            echo $data > $arduino_dev
+            if [ $arduino_dev ]; then
+                sudo chmod 777 $arduino_dev
+                # stty -F $arduino_dev -hupcl
+                stty -F /dev/ttyUSB0 115200 cs8 -cstopb -parenb
+                arduino_dev_before=$arduino_dev
+                data="$data|"
+                echo "Enviando a $arduino_dev -> data: $data"
+                echo $data > $arduino_dev
+            else
+                echo "Arduino no encontrado, los datos de envio serían -> data: $data"
+            fi
         fi
 
     else
