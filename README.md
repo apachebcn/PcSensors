@@ -13,9 +13,9 @@ El montaje consta de 2 partes.
 # Configuración
 
 ## Seleccionamos los sensores que queremos usar
-Ejecutamos 'sensors' para ver si linux nos está listando todos los sensores que queremos usar. (si no aparecen, leemos la sección "sensors no está listando todos los sensores")<br>
-La ejecución de sensors solo nos sirve para ver si todos nuestros sensores están siendo detectados, pero no nos sirve como referencia en la configuración.<br>
-Ejecutamos 'list_sensors.sh' para escoger los nombres de los dispositivos para realizar la configuración.<br>
+Ejecutamos 'sensors' para ver si linux nos está listando todos los sensores que queremos usar. (si no aparecen, leemos la sección "sensors no está listando todos los sensores")<br><br>
+La ejecución de sensors solo nos sirve para ver si todos nuestros sensores están siendo detectados, pero no nos sirve como referencia en la configuración.<br><br>
+Ejecutamos 'list_sensors.sh' para escoger los nombres de los dispositivos para realizar la configuración.<br><br>
 Un ejemplo de ello:<br>
 <pre>
 --- LISTA DE SENSORES ---
