@@ -45,7 +45,7 @@ Composite: /sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/hwmon/hwmon0/temp1_
 /sys/devices/platform/nct6775.656/hwmon/hwmon6/fan2_input: 539RPM
 /sys/devices/pci0000:00/0000:00:03.1/0000:0a:00.0/hwmon/hwmon5/fan1_input: 1169RPM
 </pre>
-
+<br>
 Escogemos las etiquetas de los sensores que queremos usar, y las guardamos en el fichero `config.txt`<br>
 Para los ventiladores, usamos también la etiqueta del sensor.<br>
 <br>
