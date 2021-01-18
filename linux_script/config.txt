@@ -1,4 +1,4 @@
-sleep_seconds=1
+sleep_seconds=3
 
 pcb_temp_label="SYSTIN"
 pcb_fan_label="SYSTIN"
